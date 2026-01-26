@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://pipelinex:pipelinex@postgres:5432/pipelinex
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./api:/app/api
+    networks:
+      - pipelinex
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: pipelinex
+      POSTGRES_PASSWORD: pipelinex
+      POSTGRES_DB: pipelinex
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d/migrations
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pipelinex"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pipelinex
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - pipelinex
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  pipelinex:
+    driver: bridge
