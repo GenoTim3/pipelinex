@@ -20,6 +20,26 @@ services:
     networks:
       - pipelinex
 
+  controller:
+    build:
+      context: .
+      dockerfile: controller/Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://pipelinex:pipelinex@postgres:5432/pipelinex
+      - REDIS_URL=redis://redis:6379/0
+      - K8S_NAMESPACE=pipelinex
+      - K8S_IN_CLUSTER=false
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./controller:/app/controller
+      - ~/.kube:/root/.kube:ro  # Mount local kubeconfig
+    networks:
+      - pipelinex
+
   postgres:
     image: postgres:15-alpine
     environment:
