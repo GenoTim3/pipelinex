@@ -1,4 +1,4 @@
-# PipelineX
+## PipelineX
 
 A lightweight CI/CD pipeline runner that integrates with GitHub and executes pipeline steps in isolated containers on Kubernetes.
 
