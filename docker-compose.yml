@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   api:
     build:
@@ -36,7 +34,18 @@ services:
         condition: service_started
     volumes:
       - ./controller:/app/controller
-      - ~/.kube:/root/.kube:ro  # Mount local kubeconfig
+      - ~/.kube:/root/.kube:ro
+    networks:
+      - pipelinex
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
     networks:
       - pipelinex
 

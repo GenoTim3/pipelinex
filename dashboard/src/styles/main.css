@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.status-pending {
+  @apply bg-gray-500;
+}
+
+.status-queued {
+  @apply bg-yellow-500;
+}
+
+.status-running {
+  @apply bg-blue-500 animate-pulse;
+}
+
+.status-succeeded {
+  @apply bg-green-500;
+}
+
+.status-failed {
+  @apply bg-red-500;
+}
+
+.log-container {
+  @apply bg-gray-950 font-mono text-sm p-4 rounded-lg overflow-auto max-h-96;
+}
+
+.log-container pre {
+  @apply whitespace-pre-wrap break-words;
+}
