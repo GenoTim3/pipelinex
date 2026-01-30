@@ -6,7 +6,7 @@ A lightweight CI/CD pipeline runner that integrates with GitHub and executes pip
 
 PipelineX listens for GitHub webhooks, parses pipeline configuration files from your repositories, and orchestrates containerized build steps on a Kubernetes cluster.
 
-Make sure to have 3 terminals to run the backend, the controller, and the frontend
+Make sure to have 3 terminals to run the backend (pipeline), the controller, and the frontend
 
 ## Architecture
 
