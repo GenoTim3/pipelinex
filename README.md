@@ -202,7 +202,7 @@ curl http://localhost:8000/api/pipelines/runs
 
 ## Troubleshooting
 
-### Common Issues
+### Common Issues / BABABOOEY
 
 #### 1. "role pipelinex does not exist" Error
 
