@@ -8,7 +8,7 @@ PipelineX listens for GitHub webhooks, parses pipeline configuration files from 
 
 Make sure to have 3 terminals to run the backend (pipeline), the controller, and the frontend
 
-Also have all dependiencies installed
+Also have all dependiencies installed, Go Seattle
 
 ## Architecture
 
